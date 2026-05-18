@@ -232,3 +232,5 @@ exec --no-startup-id blueman-appalet
 exec --no-startup-id thunar --daemon
 exec --no-startup-id /usr/lib/xdg-desktop-portal &
 exec --no-startup-id /usr/lib/xdg-desktop-portal-gtk &
+
+exec_always --no-startup-id picom &
