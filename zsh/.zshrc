@@ -105,4 +105,6 @@ source $ZSH/oh-my-zsh.sh
 # Import warna dari pywal
 (cat ~/.cache/wal/sequences &)
 
-clear && fastfetch
+clear 
+
+eval "$(starship init zsh)"

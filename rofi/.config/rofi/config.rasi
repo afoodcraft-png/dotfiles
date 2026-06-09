@@ -167,3 +167,11 @@ configuration {
       sorting-method:    "name";
   }
 }
+
+configuration {
+    modi:    "drun,run";
+    font:    "JetBrainsMono Nerd Font 11";
+    show-icons: true;
+}
+
+@theme "catppuccin-mocha"

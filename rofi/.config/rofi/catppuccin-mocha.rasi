@@ -1,0 +1,65 @@
+* {
+    bg:      #1e1e2e;
+    bg-alt:  #313244;
+    fg:      #cdd6f4;
+    fg-alt:  #6c7086;
+    accent:  #cba6f7;
+    urgent:  #f38ba8;
+
+    background-color: transparent;
+    text-color:       @fg;
+}
+
+window {
+    background-color: @bg;
+    border:           2px;
+    border-color:     @accent;
+    border-radius:    10px;
+    width:            500px;
+}
+
+mainbox {
+    padding: 12px;
+}
+
+inputbar {
+    background-color: @bg-alt;
+    border-radius:    8px;
+    padding:          8px 12px;
+    margin:           0 0 10px 0;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    text-color:  @accent;
+    margin:      0 8px 0 0;
+}
+
+entry {
+    text-color: @fg;
+}
+
+listview {
+    lines:   8;
+    columns: 1;
+    spacing: 4px;
+}
+
+element {
+    padding:       8px 12px;
+    border-radius: 6px;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color:       @fg;
+}
+
+element selected.normal {
+    background-color: @accent;
+    text-color:       @bg;
+}
+
+element normal.urgent {
+    text-color: @urgent;
+}
