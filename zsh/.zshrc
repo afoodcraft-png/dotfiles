@@ -108,3 +108,6 @@ source $ZSH/oh-my-zsh.sh
 clear 
 
 eval "$(starship init zsh)"
+
+# Created by `pipx` on 2026-06-09 13:14:13
+export PATH="$PATH:/home/alfaroji/.local/bin"
