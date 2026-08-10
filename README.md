@@ -11,7 +11,8 @@ Konfigurasi Arch Linux + i3 saya. Minimal, terminal-focused, tema **Catppuccin M
 - **Compositor**: picom
 - **Bar**: polybar
 - **Launcher**: rofi
-- **Shell**: zsh
+- **Notifikasi**: dunst
+- **Shell**: zsh + [Oh My Zsh](https://ohmyz.sh/) + [Starship](https://starship.rs/) prompt
 
 ## Struktur
 
@@ -20,46 +21,69 @@ Dotfiles ini di-manage pakai [GNU Stow](https://www.gnu.org/software/stow/), tia
 ```
 dotfiles/
 ├── alacritty/.config/alacritty
+├── dunst/.config/dunst
 ├── i3/.config/i3
 ├── picom/.config/picom
 ├── polybar/.config/polybar
 ├── rofi/.config/rofi
-└── zsh/
+└── zsh/.zshrc
 ```
 
-## Instalasi
+## Instalasi (cara cepat)
 
-1. Clone repo:
-   ```bash
-   git clone https://github.com/afoodcraft-png/dotfiles.git ~/dotfiles
-   cd ~/dotfiles
-   ```
+```bash
+git clone https://github.com/afoodcraft-png/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+chmod +x install.sh
+./install.sh
+```
 
-2. Install stow (kalau belum ada):
-   ```bash
-   sudo pacman -S stow
-   ```
+`install.sh` otomatis akan:
+1. Install package inti lewat `pacman` (i3, polybar, rofi, alacritty, picom, feh, dunst, zsh, starship)
+2. Install Oh My Zsh (kalau belum ada) + plugin `zsh-autosuggestions` & `zsh-syntax-highlighting`
+3. Backup config lama yang bentrok ke `~/.config-backup-<tanggal>`
+4. Stow semua dotfiles ke `$HOME`
+5. Tanya apakah mau set zsh jadi default shell
 
-3. Symlink konfigurasi yang mau dipakai:
+> ⚠️ **Belum pernah dites di fresh install 100% otomatis dari awal sampai akhir.** Kalau ada error pas jalanin, kirim output-nya — kemungkinan besar cuma dependency yang kurang.
+
+## Instalasi manual (kalau mau kontrol tiap langkah)
+
+1. Install stow: `sudo pacman -S stow`
+2. Symlink konfigurasi yang mau dipakai:
    ```bash
    stow alacritty
    stow i3
    stow picom
    stow polybar
    stow rofi
+   stow dunst
    stow zsh
    ```
-
-   Atau sekaligus semua:
-   ```bash
-   stow */
-   ```
-
-4. Kalau ada file yang bentrok (misal `.zshrc` bawaan sistem), hapus/backup dulu sebelum stow:
+   Atau sekaligus semua: `stow */`
+3. Kalau ada file yang bentrok (misal `.zshrc` bawaan sistem), backup dulu sebelum stow:
    ```bash
    mv ~/.zshrc ~/.zshrc.bak
    stow zsh
    ```
+4. Install Oh My Zsh + plugin secara manual (lihat isi `install.sh` bagian "Setting up Oh My Zsh" kalau mau contoh command-nya), lalu install `starship` (`sudo pacman -S starship`) — `.zshrc` di repo ini butuh keduanya supaya prompt-nya kebentuk.
+
+## Dependency opsional (AUR)
+
+Beberapa baris `exec` di `i3/.config/i3/config` manggil program yang **nggak** ada di repo resmi Arch, jadi harus install manual pakai AUR helper (`yay`/`paru`) kalau mau semuanya jalan:
+
+- `autotiling`
+- `thunar` (file manager)
+- `blueman-applet` (Bluetooth tray)
+- `cbatticon` (battery indicator)
+- `caffeine-indicator`
+- `python-pywal` (`wal -R` buat re-apply color scheme)
+
+Kalau nggak di-install, i3 cuma diem-diem gagal jalanin baris `exec` itu tanpa bikin crash — jadi aman untuk skip kalau nggak butuh, tinggal comment/hapus baris terkait di `i3/.config/i3/config`.
+
+## Wallpaper
+
+Path wallpaper di-hardcode di i3 config: `~/Pictures/wallpapers/nazuna.jpg`.
 
 ## Update konfigurasi
 
@@ -71,10 +95,6 @@ git add .
 git commit -m "update: deskripsi perubahan"
 git push
 ```
-
-## Screenshot
-
-_(tambahkan screenshot rice di sini)_
 
 ## Lisensi
 
